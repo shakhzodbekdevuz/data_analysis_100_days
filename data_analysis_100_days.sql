@@ -85,3 +85,104 @@ select * from dbo.nobel_win
 where subject not like 'P%'
  ORDER BY year DESC, winner;
 
+
+/*Boolean type Misollar*/
+/*Misol-1*/
+select customer_id,cust_name,city from Inventory.Customer
+where grade>100
+
+/*Misol-2*/
+select customer_id, cust_name, city, grade, salesman_id from Inventory.Customer
+where city='New York' and grade>100
+
+/*Misol-3*/
+select * from Inventory.Customer
+where city='New York' or grade>100
+
+/*Misol-4*/
+select * from Inventory.Customer
+where city='New York' or grade<=100
+/*Misol-5*/
+select * from Inventory.Customer
+where not (city='New York' or grade>100)
+
+/*Misol-6*/
+select * from Inventory.Orders
+where not (ord_date='2012-09-10' and salesman_id>5005 or purch_amt>1000)
+
+/*Misol-7*/
+select salesman_id, name, city,  commission from Inventory.Salesman
+where commission between 0.10 and 0.12
+
+/*Misol-8*/
+select * from Inventory.Orders
+where purch_amt<200 or  not(ord_date>='2012-02-10' and customer_id<3009)
+
+/*Misol-9*/
+select * from Inventory.Orders
+where (ord_date!='2012-08-17' or customer_id>3005 and purch_amt<1000)
+/*Misol-10*/
+SELECT ord_no,purch_amt, 
+(100*purch_amt)/6000 AS "Achieved %", 
+(100*(6000-purch_amt)/6000) AS "Unachieved %" 
+FROM  Inventory.Orders 
+WHERE (100*purch_amt)/6000>50;
+
+/*Misol-11*/
+select emp_idno,emp_fname,emp_lname, emp_dept from emp_details 
+where   emp_lname in ('Dosni','Mardy')
+
+/*Misol-12*/
+select * from emp_details
+where emp_dept=47 or emp_dept=63
+order by emp_dept
+
+
+
+
+/*Wildcard and Special operators*/
+/*Misol 1*/
+select * from Inventory.Salesman
+where city in ('Paris','Rome')
+
+/*Misol 2*/
+select * from Inventory.Salesman
+where city  in('Paris','Rome')
+
+/*Misol 3*/
+select * from Inventory.Salesman
+where city not in('Paris','Rome')
+
+/*Misol 4*/
+select * from Inventory.Customer
+where customer_id  in(3007,3008,3009)
+
+/*Misol 5*/
+select * from Inventory.Salesman
+where commission  between 0.12 and 0.14
+
+/*Misol 6*/
+select * from Inventory.Orders
+where (purch_amt between 500 and 4000) and (purch_amt not between 948.50 and 1983.43)
+
+/*Misol 7*/
+select * from Inventory.Salesman
+where name between 'A' and 'L'
+
+/*Misol 8*/
+select * from Inventory.Salesman
+where name not between 'A' and 'L'
+
+/*Misol 9*/
+select * from Inventory.Customer
+where cust_name like 'B%'
+
+/*Misol 10*/
+select * from Inventory.Customer
+where cust_name like '%n'
+order by customer_id
+
+/*Misol 11*/
+SELECT *FROM Inventory.Salesman
+WHERE name LIKE 'N__l%';
+
